@@ -1,0 +1,189 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<style>
+    #filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .filter {
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        opacity: 0.5;
+    }
+    .filter:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+    .filter p {
+        font-size: 0.8rem;
+    }
+    .RS-toggle {
+        display: flex;
+    }
+    .filter a {
+        text-decoration: none;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-body-light">
+    <div class="container-fluid">
+        <!-- <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup2"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup2">
+            <div class="navbar-nav">
+                <div id="filters">
+                    <div class="filter nav-link">
+                        <a href="/category/Trending"
+                            ><div><i class="fa-solid fa-fire"></i></div>
+                            <p>Trending</p></a
+                        >
+                    </div>
+                    <div class="filter nav-link">
+                        <a href="/category/Rentals">
+                            <div><i class="fa-solid fa-bed"></i></div>
+                            <p>Rentals</p>
+                        </a>
+                    </div>
+                    <div class="filter nav-link">
+                        <a href="/category/Iconic-cities">
+                            <div><i class="fa-solid fa-mountain-city"></i></div>
+                            <p>Iconic cities</p>
+                        </a>
+                    </div>
+                    <div class="filter nav-link">
+                        <a href="/category/Sharing">
+                            <div>
+                                <i class="fa-solid fa-house-circle-check"></i>
+                            </div>
+                            <p>Sharing</p>
+                        </a>
+                    </div>
+                    <div class="filter nav-link">
+                        <a href="/category/Society">
+                            <div><i class="fa-solid fa-gem"></i></div>
+                            <p>Society</p>
+                        </a>
+                    </div>
+                    <div class="filter nav-link">
+                        <a href="/category/Premium">
+                            <div><i class="fa-brands fa-fort-awesome"></i></div>
+                            <p>Premium</p>
+                        </a>
+                    </div>
+                    <div class="filter nav-link">
+                        <a href="/category/Pools">
+                            <div>
+                                <i class="fa-solid fa-person-swimming"></i>
+                            </div>
+                            <p>Pools</p>
+                        </a>
+                    </div>
+
+                    <div class="RS-toggle">
+                        <div class="form-check-reverse form-switch">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                role="switch"
+                                id="flexSwitchCheckDefault"
+                            />
+                            <label
+                                class="form-check-label"
+                                for="flexSwitchCheckDefault"
+                                >Rent</label
+                            >
+                        </div>
+                        <label
+                            class="ms-2 form-check-label"
+                            for="flexSwitchCheckDefault"
+                            >Buy</label
+                        >
+                        <script>
+                            const checkbox = document.getElementById(
+                                "flexSwitchCheckDefault"
+                            );
+                            const currentUrl = window.location.pathname; // Get current path
+
+                            // Check for previously stored state in local storage
+                            const isChecked =
+                                localStorage.getItem("checkboxState") ===
+                                "true";
+                            checkbox.checked = isChecked; // Set checkbox based on stored state
+
+                            checkbox.addEventListener("change", () => {
+                                const newState = checkbox.checked;
+                                localStorage.setItem("checkboxState", newState); // Store new state
+
+                                if (newState) {
+                                    window.location.href = currentUrl.replace(
+                                        currentUrl,
+                                        "/type/Buy"
+                                    );
+                                } else {
+                                    window.location.href = currentUrl.replace(
+                                        currentUrl,
+                                        "/type/Rent"
+                                    );
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 mt-3">
+    <% for(let listing of allListings) {%>
+    <a href="/listings/<%= listing._id %>" class="listing-link">
+        <div class="card col listing-card">
+            <img
+                src="<%= listing.image.url %>"
+                class="card-img-top"
+                alt="Listing_image"
+                style="height: 20rem"
+            />
+            <div class="card-img-overlay"></div>
+            <div class="card-body">
+                <p class="card-text">
+                    <b><%= listing.title %> </b><br />
+                    &#8377;<%= (listing.price).toLocaleString("en-IN") %>/month</br>
+                    <% if (listing.advance) { %>
+                        &#8377;<%= (listing.advance).toLocaleString("en-IN") %> as advance
+                    <% } %>
+                </p>
+            </div>
+        </div>
+    </a>
+    <% } %>
+</div>
+
+<!-- COMMENTED!!
+<ul>
+    <% for(let listing of allListings) {%>
+    <li><a href="/listings/<%= listing._id %>"><%= listing.title %></a></li>
+    <% } %>
+</ul> -->
+
+<!-- <script>
+    let toggle = document.getElementById("flexSwitchCheckDefault");
+    let toggleSwitch = true;
+    let redirectUrl = "/category/Sharing";
+    toggle.addEventListener("change", () => {
+        if (toggleSwitch) {
+            if (checkbox.checked) {
+                window.location.href = redirectUrl;
+            }
+            toggleSwitch = false;
+        }
+    });
+</script> -->

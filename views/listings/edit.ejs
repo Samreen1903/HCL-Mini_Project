@@ -1,0 +1,147 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+        <h3>Edit your Listing</h3>
+        <br /><br />
+        <form
+            method="post"
+            action="/listings/<%= listing._id %>?_method=PUT"
+            novalidate
+            class="needs-validation"
+            enctype="multipart/form-data"
+        >
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input
+                    class="form-control"
+                    name="listing[title]"
+                    placeholder="Enter title"
+                    value="<%=listing.title%>"
+                    type="text"
+                    required
+                />
+                <div class="valid-feedback">Title looks good</div>
+                <div class="invalid-feedback">Title should be valid</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea
+                    class="form-control"
+                    name="listing[description]"
+                    placeholder="Enter Description"
+                    type="text"
+                    required
+                >
+<%=listing.description%></textarea
+                >
+                <div class="invalid-feedback">Description should be valid</div>
+            </div>
+
+            <div class="mb-3">
+                Original Listing<br />
+                <img
+                    style="height: 20%; width: 20%"
+                    src="<%= originalImageUrl %>"
+                />
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload New Image</label>
+                <input type="file" class="form-control" name="listing[image]" />
+            </div>
+
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="price" class="form-label">Price</label>
+                    <input
+                        class="form-control"
+                        name="listing[price]"
+                        placeholder="Enter price"
+                        type="number"
+                        value="<%=listing.price%>"
+                        required
+                    />
+                    <div class="invalid-feedback">price should be valid</div>
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label for="country" class="form-label">Country</label>
+                    <input
+                        class="form-control"
+                        name="listing[country]"
+                        placeholder="Enter country"
+                        value="<%=listing.country%>"
+                        type="text"
+                        required
+                    />
+                    <div class="invalid-feedback">Country should be valid</div>
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label for="advance" class="form-label">Advance</label>
+                    <input
+                        class="form-control"
+                        name="listing[advance]"
+                        placeholder="Enter advance"
+                        value="<%=listing.advance%>"
+                        type="number"
+                    />
+                    <div class="invalid-feedback">Country should be valid</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="location" class="form-label">Location</label>
+                    <input
+                        name="listing[location]"
+                        placeholder="Enter location"
+                        type="text"
+                        class="form-control"
+                        required
+                        value="<%=listing.location%>"
+                    />
+                    <div class="invalid-feedback">Location should be valid</div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="contact" class="form-label">Contact</label>
+                    <input
+                        name="listing[contact]"
+                        placeholder="EMail or Ph. Number"
+                        type="text"
+                        class="form-control"
+                        required
+                        value="<%=listing.contact%>"
+                    />
+                    <div class="invalid-feedback">Contact should be valid</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="location" class="form-label"
+                        >Property Type</label
+                    >
+                    <select name="listing[propertyType]" class="form-control">
+                        <option value="Sell">Sell</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Open-for-both">Open for both</option>
+                    </select>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label class="form-label">Select Category</label>
+                    <select name="listing[category]" class="form-control">
+                        <option value="Trending">Trending</option>
+                        <option value="Rentals">Rentals (PG)</option>
+                        <option value="Iconic-cities">Iconic-cities</option>
+                        <option value="Sharing">Sharing</option>
+                        <option value="Society">Society</option>
+                        <option value="Premium">Premium</option>
+                        <option value="Pools">Pools</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn btn-dark edit-btn mb-3 mt-3">edit</button>
+        </form>
+    </div>
+</div>
