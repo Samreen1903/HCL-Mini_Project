@@ -59,10 +59,3 @@ Ensure the following are installed on your system:
 
 ## Contributing
 Contributions are welcome! Fork the repository, make your changes, and open a pull request.
-
-## License
-This project is licensed under the MIT License.
-
-## Contact
-For questions or feedback, reach out at [your_email@example.com].
-
